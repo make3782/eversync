@@ -73,11 +73,14 @@ class OrgModeProcessor(NoteFileProcessor):
 
     def _org_ruby_convert(self):
         _, html = utils.shell_command('org-ruby {} --translate html'.format(self.path))
+        # _, html = utils.shell_command('pandoc {}'.format(self.path))
         cleaner = clean.Cleaner(safe_attrs_only=True, safe_attrs=frozenset())
-        html = cleaner.clean_html(html)
-        # Fix horizontal rule.
-        # With org-ruby, it converts dash-lines to '<hr>', which is invalid
-        # ENML, converting it to <hr/>
+
+        html = cleaner.clean_html(''.join(html).decode("utf-8"))
+        html = html.replace('<br>', '<br/>')
+        # # Fix horizontal rule.
+        # # With org-ruby, it converts dash-lines to '<hr>', which is invalid
+        # # ENML, converting it to <hr/>
         html = html.replace('<hr>', '<hr/>')
         return html
 

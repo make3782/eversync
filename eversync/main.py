@@ -18,7 +18,7 @@ from evernote.edam.error.constants import EDAMErrorCode
 
 from eversync import utils
 from eversync.log import log, error, debug, debug_mode
-from eversync.processor import TextProcessor, MarkdownProcessor, OrgModeProcessor
+from processor import TextProcessor, MarkdownProcessor, OrgModeProcessor
 
 service_host = os.environ.get('EVERNOTE_SERVICE_HOST',
                               'app.yinxiang.com')
